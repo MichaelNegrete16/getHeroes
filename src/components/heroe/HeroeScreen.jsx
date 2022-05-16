@@ -2,6 +2,9 @@ import React, { useMemo } from 'react'
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById'
 
+// llamada de las imagenes utilizando webpack - ya esto viene con react
+const heroCardImg = require.context('../../assets/img', true)
+
 const HeroeScreen = () => {
     // Extraer el id de la url
     const {id} = useParams()
@@ -22,7 +25,11 @@ const HeroeScreen = () => {
       <div className='row mt-5'>
 
           <div className='col-4'>
-              <img src={`/assets/img/${hero.id}.jpg`} alt={hero.superhero} className='animate__animated animate__bounceInLeft  img-thumbnail'/>
+              {/* Forma normal de llamar las imagenes desde public/assets */}
+              {/* <img src={`/assets/img/${hero.id}.jpg`} alt={hero.superhero} className='animate__animated animate__bounceInLeft  img-thumbnail'/> */}
+
+              {/* forma de llamar las imagens con webpack */}
+              <img src={heroCardImg(`./${hero.id}.jpg`)} alt={hero.superhero} className='animate__animated animate__bounceInLeft img-thumbnail' />
           </div>
 
           <div className='col-8'>

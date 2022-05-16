@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom"
 import '../../css/herosCard.css'
 
+
+// llamada de las imagenes utilizando webpack - ya esto viene con react
+const heroCardImg = require.context('../../assets/img', true)
+
 const HeroCard = ({id,superhero,alter_ego,first_appearance,characters}) => {
   return (
         <div className="animate__animated animate__fadeIn card-group">
                 <div className="card">
 
                     <div className="imgDesing">
-                        <img src={`/assets/img/${id}.jpg`} className='card-img-top' alt={superhero} />
+                        {/* Leyendo las imagenes desde public/assest */}
+                        {/* <img src={`/assets/img/${id}.jpg`} className='card-img-top' alt={superhero} /> */}
+
+                        {/* Leyendo las imagenes desde webpack*/}
+                        <img src={heroCardImg(`./${id}.jpg`)} alt={superhero} className='card-img-top'/>
                     </div>
 
                     <div className="card-body">
